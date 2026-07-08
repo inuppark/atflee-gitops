@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ax-console
+  labels:
+    app: ax-console
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ax-console
+  template:
+    metadata:
+      labels:
+        app: ax-console
+    spec:
+      containers:
+        - name: ax-console
+          image: atfleeacr0707.azurecr.io/ax-console:v1
+          ports:
+            - containerPort: 8501
+          env:
+            - name: ANTHROPIC_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: ax-console-secrets
+                  key: ANTHROPIC_API_KEY
+            - name: UPSTAGE_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: ax-console-secrets
+                  key: UPSTAGE_API_KEY
+                  optional: true
