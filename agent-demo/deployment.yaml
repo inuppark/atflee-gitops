@@ -1,0 +1,21 @@
+﻿apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: agent-demo
+  labels:
+    app: agent-demo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: agent-demo
+  template:
+    metadata:
+      labels:
+        app: agent-demo
+    spec:
+      containers:
+        - name: agent-demo
+          image: nginxdemos/hello:plain-text
+          ports:
+            - containerPort: 80
