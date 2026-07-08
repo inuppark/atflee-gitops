@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: ax-console
-          image: atfleeacr0707.azurecr.io/ax-console:v1
+          image: atfleeacr0707.azurecr.io/ax-console:9d733b826e8a05987fcae0b68453a754e8005eb2
           ports:
             - containerPort: 8501
           env:
