@@ -1,4 +1,4 @@
-apiVersion: apps/v1
+﻿apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: ax-console
@@ -6,6 +6,11 @@ metadata:
     app: ax-console
 spec:
   replicas: 2
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 0
+      maxSurge: 1
   selector:
     matchLabels:
       app: ax-console
@@ -16,9 +21,19 @@ spec:
     spec:
       containers:
         - name: ax-console
-          image: atfleeacr0707.azurecr.io/ax-console:v1
+          image: atfleeacr0707.azurecr.io/ax-console:9d733b826e8a05987fcae0b68453a754e8005eb2
           ports:
             - containerPort: 8501
+          readinessProbe:
+            tcpSocket:
+              port: 8501
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          livenessProbe:
+            tcpSocket:
+              port: 8501
+            initialDelaySeconds: 30
+            periodSeconds: 20
           env:
             - name: ANTHROPIC_API_KEY
               valueFrom:
