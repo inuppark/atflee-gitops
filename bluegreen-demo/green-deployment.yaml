@@ -4,7 +4,7 @@ metadata:
   name: bg-demo-green
   labels: { app: bg-demo, version: green }
 spec:
-  replicas: 1
+  replicas: 4
   selector:
     matchLabels: { app: bg-demo, version: green }
   template:
