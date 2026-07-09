@@ -1,0 +1,19 @@
+﻿apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bg-demo-green
+  labels: { app: bg-demo, version: green }
+spec:
+  replicas: 2
+  selector:
+    matchLabels: { app: bg-demo, version: green }
+  template:
+    metadata:
+      labels: { app: bg-demo, version: green }
+    spec:
+      containers:
+        - name: app
+          image: hashicorp/http-echo:0.2.3
+          args: ["-text=GREEN (v2)", "-listen=:5678"]
+          ports:
+            - containerPort: 5678
