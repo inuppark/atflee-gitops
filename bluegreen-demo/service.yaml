@@ -4,7 +4,7 @@ metadata:
   name: bg-demo
 spec:
   type: ClusterIP
-  selector: { app: bg-demo, version: green }
+  selector: { app: bg-demo }
   ports:
     - port: 80
       targetPort: 5678
