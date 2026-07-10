@@ -12,7 +12,7 @@ spec:
           restartPolicy: Never
           containers:
             - name: voc-agent
-              image: atfleeacr0707.azurecr.io/voc-agent:v3
+              image: atfleeacr0707.azurecr.io/voc-agent:v4
               env:
                 - name: ANTHROPIC_API_KEY
                   valueFrom:
