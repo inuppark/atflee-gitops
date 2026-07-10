@@ -3,13 +3,12 @@ kind: CronJob
 metadata:
   name: voc-report
 spec:
-  schedule: "*/1 * * * *"
+  schedule: "*/3 * * * *"
   jobTemplate:
     spec:
       template:
         spec:
           restartPolicy: Never
           containers:
-            - name: report
-              image: busybox:1.36
-              command: ["sh", "-c", "echo VOC daily summary generated at $(date)"]
+            - name: voc-agent
+              image: atfleeacr0707.azurecr.io/voc-agent:v1
