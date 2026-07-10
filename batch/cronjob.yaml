@@ -3,7 +3,8 @@ kind: CronJob
 metadata:
   name: voc-report
 spec:
-  schedule: "*/3 * * * *"
+  schedule: "0 21 * * *"
+  timeZone: "Asia/Seoul"
   jobTemplate:
     spec:
       template:
