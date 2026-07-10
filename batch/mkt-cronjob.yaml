@@ -1,9 +1,9 @@
 ﻿apiVersion: batch/v1
 kind: CronJob
 metadata:
-  name: voc-report
+  name: mkt-report
 spec:
-  schedule: "0 6 * * *"
+  schedule: "30 6 * * *"
   timeZone: "Asia/Seoul"
   jobTemplate:
     spec:
@@ -11,8 +11,8 @@ spec:
         spec:
           restartPolicy: Never
           containers:
-            - name: voc-agent
-              image: atfleeacr0707.azurecr.io/voc-agent:v5
+            - name: mkt-agent
+              image: atfleeacr0707.azurecr.io/mkt-agent:v1
               env:
                 - name: ANTHROPIC_API_KEY
                   valueFrom:
