@@ -1,0 +1,30 @@
+﻿apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: AGENTNAME
+  namespace: AGENTNAME
+spec:
+  schedule: "0 6 * * *"
+  timeZone: "Asia/Seoul"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          restartPolicy: Never
+          containers:
+            - name: AGENTNAME
+              image: atfleeacr0707.azurecr.io/AGENTNAME:v1
+              resources:
+                requests: { cpu: "100m", memory: "128Mi" }
+                limits:   { cpu: "500m", memory: "512Mi" }
+              env:
+                - name: ANTHROPIC_API_KEY
+                  valueFrom:
+                    secretKeyRef:
+                      name: AGENTNAME-secrets
+                      key: ANTHROPIC_API_KEY
+                - name: SLACK_WEBHOOK_URL
+                  valueFrom:
+                    secretKeyRef:
+                      name: AGENTNAME-secrets
+                      key: SLACK_WEBHOOK_URL

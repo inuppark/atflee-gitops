@@ -1,0 +1,44 @@
+﻿apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: AGENTNAME
+  namespace: AGENTNAME
+spec:
+  replicas: 1
+  selector:
+    matchLabels: { app: AGENTNAME }
+  template:
+    metadata:
+      labels: { app: AGENTNAME }
+    spec:
+      containers:
+        - name: AGENTNAME
+          image: atfleeacr0707.azurecr.io/AGENTNAME:v1
+          resources:
+            requests: { cpu: "100m", memory: "128Mi" }
+            limits:   { cpu: "500m", memory: "512Mi" }
+          ports:
+            - containerPort: 8080
+          readinessProbe:
+            httpGet: { path: /health, port: 8080 }
+            initialDelaySeconds: 5
+          livenessProbe:
+            httpGet: { path: /health, port: 8080 }
+            initialDelaySeconds: 10
+          env:
+            - name: ANTHROPIC_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: AGENTNAME-secrets
+                  key: ANTHROPIC_API_KEY
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: AGENTNAME
+  namespace: AGENTNAME
+spec:
+  selector: { app: AGENTNAME }
+  ports:
+    - port: 80
+      targetPort: 8080
