@@ -3,6 +3,8 @@ kind: Application
 metadata:
   name: ax-console
   namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
 spec:
   project: default
   source:
