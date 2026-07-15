@@ -52,9 +52,12 @@ spec:
       serviceAccountName: dashboard
       containers:
         - name: dashboard
-          image: atfleeacr0707.azurecr.io/dashboard:v1
+          image: atfleeacr0707.azurecr.io/dashboard:v2
           ports:
             - containerPort: 8080
+          envFrom:
+            - secretRef:
+                name: dashboard-azure
           readinessProbe:
             tcpSocket:
               port: 8080
