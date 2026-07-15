@@ -52,7 +52,7 @@ spec:
       serviceAccountName: dashboard
       containers:
         - name: dashboard
-          image: atfleeacr0707.azurecr.io/dashboard:v3
+          image: atfleeacr0707.azurecr.io/dashboard:v4
           ports:
             - containerPort: 8080
           envFrom:
